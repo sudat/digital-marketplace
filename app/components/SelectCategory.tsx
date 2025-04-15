@@ -7,6 +7,7 @@ export function SelectCategory() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   return (
     <div className="grid  sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <input type="hidden" name="category" value={selectedCategory ?? ""} />
       {categoryItems.map((item) => (
         <div key={item.id} className="cursor-pointer">
           <Card

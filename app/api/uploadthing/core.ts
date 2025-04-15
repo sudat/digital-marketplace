@@ -25,9 +25,12 @@ export const ourFileRouter = {
 
       return { uploadedBy: metadata.userId };
     }),
-
   productFileUploader: f({
     "application/zip": {
+      maxFileCount: 1,
+    },
+    // @ts-expect-error 型定義にはないが問題なく動作する
+    "application/x-zip-compressed": {
       maxFileCount: 1,
     },
   })
