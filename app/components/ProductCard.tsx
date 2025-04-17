@@ -6,6 +6,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,7 +25,7 @@ export function ProductCard({
   id,
 }: ProductCardProps) {
   return (
-    <div className="rounded-lg flex flex-col">
+    <div className="rounded-lg">
       <Carousel>
         <CarouselContent>
           {images.map((item, index) => (
@@ -50,13 +51,26 @@ export function ProductCard({
           ${price}
         </h3>
       </div>
-      <p className="mt-2 text-sm text-gray-500 line-clamp-2 mb-3">
+      <p className="my-2 text-sm text-gray-500 line-clamp-2 h-12">
         {smallDescription}
       </p>
 
-      <Button asChild className="w-full mt-auto">
+      <Button asChild className="w-full">
         <Link href={`/product/${id}`}>learn more!</Link>
       </Button>
+    </div>
+  );
+}
+
+export function LoadingProductCard() {
+  return (
+    <div className="flex flex-col">
+      <Skeleton className="w-full h-[230px]" />
+      <div className="flex flex-col mt-2 gap-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-6 w-full" />
+      </div>
+      <Skeleton className="h-10 w-full mt-5" />
     </div>
   );
 }

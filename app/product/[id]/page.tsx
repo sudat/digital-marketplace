@@ -43,10 +43,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const data = await getData(id);
   return (
     <section
-      className="
-    mx-auto px-4  lg:mt-10 max-w-7xl lg:px-8 lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16"
+      className="container 
+    mx-auto px-4  lg:mt-10 lg:px-8 lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16"
     >
-      <Carousel className="lg:row-end-1 lg:col-span-4">
+      <Carousel className="lg:col-span-4">
         <CarouselContent>
           {data?.images.map((item, index) => (
             <CarouselItem key={index}>
@@ -66,7 +66,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </Carousel>
 
       {/* Product Details */}
-      <div className="max-w-2xl mx-auto mt-5 lg:max-w-none lg:mt-0 lg:row-end-2 lg:row-span-2 lg:col-span-3 w-full">
+      <div className="mx-auto mt-5 lg:max-w-none lg:mt-0 lg:row-span-2 lg:col-span-3 w-full">
         <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
           {data?.name}
         </h1>
@@ -76,22 +76,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </Button>
         <Separator className="my-10 border-t border-gray-300" />
         <div className="grid grid-cols-2 w-full gap-y-3">
-          <h3 className="text-muted-foreground text-sm font-medium col-span-1">
+          <h3 className="text-muted-foreground text-sm font-medium ">
             Released:
           </h3>
-          <h3 className="text-sm font-medium col-span-1">
+          <h3 className="text-sm font-medium">
             {data?.createdAt.toLocaleDateString()}
           </h3>
-          <h3 className="text-muted-foreground text-sm font-medium col-span-1">
+          <h3 className="text-muted-foreground text-sm font-medium">
             Category:
           </h3>
-          <h3 className="text-sm font-medium col-span-1">{data?.category}</h3>
+          <h3 className="text-sm font-medium">{data?.category}</h3>
         </div>
         <Separator className="my-10 border-t border-gray-300" />
       </div>
 
       {/* Product Description */}
-      <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
+      <div className="w-full max-w-2xl mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
         <ProductDescription content={data?.description as JSONContent} />
       </div>
     </section>
