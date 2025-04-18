@@ -1,4 +1,5 @@
-import { ProductRow } from "./components/ProductRow";
+import { ProductRow } from "@/app/components/ProductRow";
+import { Separator } from "@/components/ui/separator";
 export default function Home() {
   return (
     <section className="container mx-auto px-4 py-8 mb-24">
@@ -11,9 +12,13 @@ export default function Home() {
           buyers alike.
         </p>
       </div>
+
       <ProductRow category="newest" />
+      <Separator className="my-10" />
       <ProductRow category="template" />
+      <Separator className="my-10" />
       <ProductRow category="uikit" />
+      <Separator className="my-10" />
       <ProductRow category="icon" />
     </section>
   );

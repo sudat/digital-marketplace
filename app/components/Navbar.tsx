@@ -13,11 +13,11 @@ export async function Navbar() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   return (
-    <nav className="relative max-w-7xl w-full flex md:grid grid-cols-12 items-center px-4 md:px-8 mx-auto py-7 justify-between">
+    <nav className="relative container w-full flex md:grid grid-cols-12 items-center px-4 md:px-8 mx-auto py-7 justify-between">
       {/* left : logo */}
       <div className="md:col-span-3">
         <Link href="/">
-          <h1 className="text-2xl font-semibold">
+          <h1 className="text-3xl font-extrabold">
             Marshal <span className="text-primary">UI</span>
           </h1>
         </Link>
