@@ -46,5 +46,9 @@ export async function GET() {
       },
     });
   }
-  return NextResponse.redirect("http://localhost:3001");
+  return NextResponse.redirect(
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3001"
+      : "https://digital-marketplace-theta-peach.vercel.app/"
+  );
 }

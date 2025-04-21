@@ -171,8 +171,14 @@ export async function buyProduct(formData: FormData) {
         destination: data?.User?.connectedAccountId as string,
       },
     },
-    success_url: "http://localhost:3001/payment/success",
-    cancel_url: "http://localhost:3001/payment/cancel",
+    success_url:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3001/payment/success"
+        : "https://vercel.com/sudat1201s-projects/payment/success",
+    cancel_url:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3001/payment/cancel"
+        : "https://vercel.com/sudat1201s-projects/payment/cancel",
   });
   return redirect(session.url as string);
 }
@@ -194,8 +200,14 @@ export async function createStripeAccountLink() {
 
   const accountLink = await stripe.accountLinks.create({
     account: data?.connectedAccountId as string,
-    refresh_url: "http://localhost:3001/billing",
-    return_url: `http://localhost:3001/return/${data?.connectedAccountId}`,
+    refresh_url:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3001/billing"
+        : "https://vercel.com/sudat1201s-projects/billing",
+    return_url:
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:3001/return/${data?.connectedAccountId}`
+        : `https://vercel.com/sudat1201s-projects/return/${data?.connectedAccountId}`,
     type: "account_onboarding",
   });
 
