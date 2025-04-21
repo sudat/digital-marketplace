@@ -174,11 +174,11 @@ export async function buyProduct(formData: FormData) {
     success_url:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3001/payment/success"
-        : "https://vercel.com/sudat1201s-projects/payment/success",
+        : "https://digital-marketplace-theta-peach.vercel.app/payment/success",
     cancel_url:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3001/payment/cancel"
-        : "https://vercel.com/sudat1201s-projects/payment/cancel",
+        : "https://digital-marketplace-theta-peach.vercel.app/payment/cancel",
   });
   return redirect(session.url as string);
 }
@@ -203,11 +203,11 @@ export async function createStripeAccountLink() {
     refresh_url:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3001/billing"
-        : "https://vercel.com/sudat1201s-projects/billing",
+        : "https://digital-marketplace-theta-peach.vercel.app/billing",
     return_url:
       process.env.NODE_ENV === "development"
         ? `http://localhost:3001/return/${data?.connectedAccountId}`
-        : `https://vercel.com/sudat1201s-projects/return/${data?.connectedAccountId}`,
+        : `https://digital-marketplace-theta-peach.vercel.app/return/${data?.connectedAccountId}`,
     type: "account_onboarding",
   });
 
