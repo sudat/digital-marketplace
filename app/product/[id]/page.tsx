@@ -9,8 +9,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { ProductDescription } from "@/app/components/ProductDescription";
 import { prisma } from "@/app/lib/db";
-import { Button } from "@/components/ui/button";
 import { type JSONContent } from "@tiptap/react";
+import { buyProduct } from "@/app/actions";
+import { BuyButton } from "@/app/components/SubmitButton";
+import { unstable_noStore as noStore } from "next/cache";
+
 async function getData(id: string) {
   const data = await prisma.product.findUnique({
     where: {
@@ -39,6 +42,7 @@ type ProductPageProps = {
   params: { id: string };
 };
 export default async function ProductPage({ params }: ProductPageProps) {
+  noStore();
   const id = await params.id;
   const data = await getData(id);
   return (
@@ -71,9 +75,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {data?.name}
         </h1>
         <p className="mt-2 text-muted-foreground">{data?.smallDescription}</p>
-        <Button size="lg" className="mt-10 w-full text-lg">
-          Buy for ${data?.price}
-        </Button>
+        <form action={buyProduct}>
+          <input type="hidden" name="id" value={id} />
+          <BuyButton price={data?.price as number} />
+        </form>
         <Separator className="my-10 border-t border-gray-300" />
         <div className="grid grid-cols-2 w-full gap-y-3">
           <h3 className="text-muted-foreground text-sm font-medium ">

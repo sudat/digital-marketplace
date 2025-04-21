@@ -1024,6 +1024,8 @@ export namespace Prisma {
     firstName: string | null
     lastName: string | null
     profileImage: string | null
+    connectedAccountId: string | null
+    stripeConnectedLinked: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1032,6 +1034,8 @@ export namespace Prisma {
     firstName: string | null
     lastName: string | null
     profileImage: string | null
+    connectedAccountId: string | null
+    stripeConnectedLinked: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1040,6 +1044,8 @@ export namespace Prisma {
     firstName: number
     lastName: number
     profileImage: number
+    connectedAccountId: number
+    stripeConnectedLinked: number
     _all: number
   }
 
@@ -1050,6 +1056,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     profileImage?: true
+    connectedAccountId?: true
+    stripeConnectedLinked?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1058,6 +1066,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     profileImage?: true
+    connectedAccountId?: true
+    stripeConnectedLinked?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1066,6 +1076,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     profileImage?: true
+    connectedAccountId?: true
+    stripeConnectedLinked?: true
     _all?: true
   }
 
@@ -1147,6 +1159,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     profileImage: string | null
+    connectedAccountId: string
+    stripeConnectedLinked: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1172,6 +1186,8 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     profileImage?: boolean
+    connectedAccountId?: boolean
+    stripeConnectedLinked?: boolean
     Product?: boolean | User$ProductArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1182,6 +1198,8 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     profileImage?: boolean
+    connectedAccountId?: boolean
+    stripeConnectedLinked?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1190,6 +1208,8 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     profileImage?: boolean
+    connectedAccountId?: boolean
+    stripeConnectedLinked?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1198,9 +1218,11 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     profileImage?: boolean
+    connectedAccountId?: boolean
+    stripeConnectedLinked?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "profileImage", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "profileImage" | "connectedAccountId" | "stripeConnectedLinked", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Product?: boolean | User$ProductArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1219,6 +1241,8 @@ export namespace Prisma {
       firstName: string
       lastName: string
       profileImage: string | null
+      connectedAccountId: string
+      stripeConnectedLinked: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1648,6 +1672,8 @@ export namespace Prisma {
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
     readonly profileImage: FieldRef<"User", 'String'>
+    readonly connectedAccountId: FieldRef<"User", 'String'>
+    readonly stripeConnectedLinked: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -3265,7 +3291,9 @@ export namespace Prisma {
     email: 'email',
     firstName: 'firstName',
     lastName: 'lastName',
-    profileImage: 'profileImage'
+    profileImage: 'profileImage',
+    connectedAccountId: 'connectedAccountId',
+    stripeConnectedLinked: 'stripeConnectedLinked'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -3343,6 +3371,13 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -3428,6 +3463,8 @@ export namespace Prisma {
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     profileImage?: StringNullableFilter<"User"> | string | null
+    connectedAccountId?: StringFilter<"User"> | string
+    stripeConnectedLinked?: BoolFilter<"User"> | boolean
     Product?: ProductListRelationFilter
   }
 
@@ -3437,11 +3474,14 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     profileImage?: SortOrderInput | SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
     Product?: ProductOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    connectedAccountId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
@@ -3449,8 +3489,9 @@ export namespace Prisma {
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     profileImage?: StringNullableFilter<"User"> | string | null
+    stripeConnectedLinked?: BoolFilter<"User"> | boolean
     Product?: ProductListRelationFilter
-  }, "id">
+  }, "id" | "connectedAccountId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -3458,6 +3499,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     profileImage?: SortOrderInput | SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -3472,6 +3515,8 @@ export namespace Prisma {
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
     profileImage?: StringNullableWithAggregatesFilter<"User"> | string | null
+    connectedAccountId?: StringWithAggregatesFilter<"User"> | string
+    stripeConnectedLinked?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type ProductWhereInput = {
@@ -3562,6 +3607,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     profileImage?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     Product?: ProductCreateNestedManyWithoutUserInput
   }
 
@@ -3571,6 +3618,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     profileImage?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
     Product?: ProductUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -3580,6 +3629,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     Product?: ProductUpdateManyWithoutUserNestedInput
   }
 
@@ -3589,6 +3640,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
     Product?: ProductUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -3598,6 +3651,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     profileImage?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
@@ -3606,6 +3661,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -3614,6 +3671,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProductCreateInput = {
@@ -3736,6 +3795,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type ProductListRelationFilter = {
     every?: ProductWhereInput
     some?: ProductWhereInput
@@ -3757,6 +3821,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     profileImage?: SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -3765,6 +3831,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     profileImage?: SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -3773,6 +3841,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     profileImage?: SortOrder
+    connectedAccountId?: SortOrder
+    stripeConnectedLinked?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -3809,6 +3879,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4007,6 +4085,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type ProductUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProductCreateWithoutUserInput, ProductUncheckedCreateWithoutUserInput> | ProductCreateWithoutUserInput[] | ProductUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutUserInput | ProductCreateOrConnectWithoutUserInput[]
@@ -4104,6 +4186,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -4158,6 +4245,14 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumCategoryTypesFilter<$PrismaModel = never> = {
@@ -4324,6 +4419,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     profileImage?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
   }
 
   export type UserUncheckedCreateWithoutProductInput = {
@@ -4332,6 +4429,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     profileImage?: string | null
+    connectedAccountId: string
+    stripeConnectedLinked?: boolean
   }
 
   export type UserCreateOrConnectWithoutProductInput = {
@@ -4356,6 +4455,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateWithoutProductInput = {
@@ -4364,6 +4465,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    connectedAccountId?: StringFieldUpdateOperationsInput | string
+    stripeConnectedLinked?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProductCreateManyUserInput = {

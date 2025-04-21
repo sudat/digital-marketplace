@@ -3,7 +3,8 @@ import { z } from "zod";
 import { prisma } from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { type CategoryTypes } from "@/lib/generated/prisma";
-
+import { stripe } from "@/app/lib/stripe";
+import { redirect } from "next/navigation";
 export type State = {
   status: "error" | "success" | undefined;
   errors?: {
@@ -125,4 +126,99 @@ export async function updateUserSettings(prevState: any, formData: FormData) {
     message: "Your settings have been updated!",
   };
   return state;
+}
+
+export async function buyProduct(formData: FormData) {
+  const id = formData.get("id") as string;
+
+  const data = await prisma.product.findUnique({
+    where: {
+      id: id,
+    },
+    select: {
+      name: true,
+      price: true,
+      images: true,
+      smallDescription: true,
+      User: {
+        select: {
+          connectedAccountId: true,
+        },
+      },
+    },
+  });
+  if (!data) return redirect("/");
+
+  const session = await stripe.checkout.sessions.create({
+    mode: "payment",
+    line_items: [
+      {
+        price_data: {
+          currency: "usd",
+          unit_amount: Math.round(data.price * 100),
+          product_data: {
+            name: data.name,
+            images: data.images,
+            description: data.smallDescription,
+          },
+        },
+        quantity: 1,
+      },
+    ],
+    payment_intent_data: {
+      application_fee_amount: Math.round(data.price * 100) * 0.1,
+      transfer_data: {
+        destination: data?.User?.connectedAccountId as string,
+      },
+    },
+    success_url: "http://localhost:3001/payment/success",
+    cancel_url: "http://localhost:3001/payment/cancel",
+  });
+  return redirect(session.url as string);
+}
+
+export async function createStripeAccountLink() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) throw new Error("User not found");
+
+  const data = await prisma.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    select: {
+      connectedAccountId: true,
+    },
+  });
+
+  const accountLink = await stripe.accountLinks.create({
+    account: data?.connectedAccountId as string,
+    refresh_url: "http://localhost:3001/billing",
+    return_url: `http://localhost:3001/return/${data?.connectedAccountId}`,
+    type: "account_onboarding",
+  });
+
+  return redirect(accountLink.url);
+}
+
+export async function getStripeDashboardLink() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  if (!user) throw new Error("User not found");
+
+  const data = await prisma.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    select: {
+      connectedAccountId: true,
+    },
+  });
+
+  const loginLink = await stripe.accounts.createLoginLink(
+    data?.connectedAccountId as string
+  );
+
+  return redirect(loginLink.url);
 }
