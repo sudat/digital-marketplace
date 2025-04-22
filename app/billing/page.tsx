@@ -32,7 +32,7 @@ export default async function BillingRoute() {
   const data = await getData(user.id);
 
   return (
-    <section className="container mx-auto px-4 md:px-8">
+    <section className="max-w-7xl mx-auto px-4 md:px-8">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Billing</CardTitle>

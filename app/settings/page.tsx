@@ -28,7 +28,7 @@ export default async function SettingsRoute() {
   const data = await getData(user.id);
 
   return (
-    <section className="container mx-auto px-4 md:px-8">
+    <section className="max-w-7xl mx-auto px-4 md:px-8">
       <Card>
         <SettingsForm
           firstName={data?.firstName as string}

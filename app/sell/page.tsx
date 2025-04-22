@@ -34,7 +34,7 @@ export default async function SellRoute() {
   }
   await getData();
   return (
-    <section className="container mx-auto px-4 md:px-8 mb-14">
+    <section className="max-w-7xl mx-auto px-4 md:px-8 mb-14">
       <Card>
         <SellForm />
       </Card>

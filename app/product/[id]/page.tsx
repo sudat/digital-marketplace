@@ -47,7 +47,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const data = await getData(id);
   return (
     <section
-      className="container 
+      className="max-w-7xl 
     mx-auto px-4  lg:mt-10 lg:px-8 lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16"
     >
       <Carousel className="lg:col-span-4">
